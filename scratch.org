@@ -1,0 +1,17 @@
+# -*- mode: org; -*-
+
+* https://perlmaven.com/debugging-perl-with-hdb
+
+use strict;
+use warnings;
+use 5.010;
+use LWP::UserAgent;
+use JSON qw(to_json);
+ 
+my $data = to_json({ fname => 'Foo', lname => 'Bar' });
+ 
+my $ua = LWP::UserAgent->new( agent => 'Great Perl Agent' );
+$ua->default_header("Content-Type" => "application/json");
+my $res = $ua->post('https://perlmaven.com/', Content => $data);
+say $res->status_line;
+say $res->content;
